@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6gf0j230wrht"]
+
+[ext_resource type="Texture2D" uid="uid://dlyabb0bawk5j" path="res://art/background2.png" id="1_xplxn"]
+[ext_resource type="Texture2D" uid="uid://de40p2gvptryp" path="res://art/Player.png" id="3_gviok"]
+[ext_resource type="Script" path="res://player_actions.gd" id="3_lp7kg"]
+[ext_resource type="Texture2D" uid="uid://bpdc08xt172ac" path="res://art/floor.png" id="4_clcri"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_muc5r"]
+size = Vector2(20, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwylc"]
+size = Vector2(1279, 78)
+
+[node name="Scene1" type="Node2D"]
+position = Vector2(641, 360)
+
+[node name="Background2" type="Sprite2D" parent="."]
+position = Vector2(-1, 0)
+texture = ExtResource("1_xplxn")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("3_lp7kg")
+speed = 400
+jump_height = 150.0
+jump_time_peak = 0.5
+jump_time_descent = 0.4
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(-613, 262)
+texture = ExtResource("3_gviok")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-613.5, 268)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_muc5r")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-615, 267)
+zoom = Vector2(1.5, 1.5)
+limit_left = -1
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.25
+drag_top_margin = 0.25
+drag_right_margin = 0.25
+drag_bottom_margin = 0.25
+editor_draw_limits = true
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(-1, 321)
+texture = ExtResource("4_clcri")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_cwylc")
